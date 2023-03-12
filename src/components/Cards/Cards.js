@@ -1,8 +1,10 @@
 import React from 'react'
-import "../styles/cards.css"
-
-const Cards = ({item,handleClick}) => {
-    const {title,author,price,img}=item;    
+import "./cards.css"
+import { handleClick } from '../ShopSlice';
+import { useDispatch } from 'react-redux';
+const Cards = ({item}) => {
+  const dispatch=useDispatch();
+  const {title,author,price,img}=item;    
   return (
     <div className='cards'>
         <div className='image_box'>
@@ -12,7 +14,7 @@ const Cards = ({item,handleClick}) => {
             <p>{title}</p>
             <p>{author}</p>
             <p>Narx-{price} so'm</p>
-            <button onClick={()=>handleClick(item)}>Savatga qo'shish</button>
+            <button onClick={()=>dispatch(handleClick(item))}>Savatga qo'shish</button>
         </div>
     </div>
   )

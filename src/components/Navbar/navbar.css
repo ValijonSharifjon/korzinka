@@ -37,3 +37,10 @@ nav{
     position: relative;
     top:-15px;
 }
+.card-link{
+    text-decoration: none;
+}
+.storage{
+    margin-right: 40px;
+    margin-top: 20px;
+}

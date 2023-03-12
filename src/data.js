@@ -1,4 +1,4 @@
-const list = [
+let list = [
     {
       id: 1,
       title: "Makaron Barilla Girandole 450g",

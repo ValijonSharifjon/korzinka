@@ -1,8 +1,13 @@
 import React, { useEffect } from 'react'
+import "./cart.css"
 import { useState } from 'react'
-import "../styles/cart.css"
-const Cart = ({cart,setCart,handleChange}) => {
+import { useDispatch } from 'react-redux'
+import { handleRemove } from '../ShopSlice'
+import { handleChange1,handleChange2 } from '../ShopSlice' 
+import Navbar from '../Navbar/Navbar'
+const Cart = ({cart}) => {
   const [price,setPrice]=useState(0)
+  const dispatch=useDispatch();
   
   const handlePrice=()=>{
     let ans=0;
@@ -11,20 +16,15 @@ const Cart = ({cart,setCart,handleChange}) => {
     ))
     setPrice(ans)
   }
-
-  const handleRemove=(id)=>{
-    const arr=cart.filter(item=>item.id!==id)
-    setCart(arr)
-    // handlePrice()
-  }
-
   useEffect(()=>{
     handlePrice()
   })
 
 
   return (
-    <article>
+    <>
+      <Navbar size={cart.length}/>
+      <article>
       {
         cart?.map((item)=>(
           <div className='cart_box' key={item.id}>
@@ -33,13 +33,13 @@ const Cart = ({cart,setCart,handleChange}) => {
               <p>{item.title}</p>
             </div>
             <div>
-              <button onClick={()=>handleChange(item,+1)}>+</button>
+              <button onClick={()=>dispatch(handleChange1(item))}>+</button>
               <button>{item.amount}</button>
-              <button onClick={()=>handleChange(item,-1)}>-</button>
+              <button onClick={()=>dispatch(handleChange2(item))}>-</button>
             </div>
             <div>
               <span>{item.price}</span>
-              <button onClick={()=>handleRemove(item.id)}>O'chirish</button>
+              <button onClick={()=>dispatch(handleRemove(item))}>O'chirish</button>
             </div>
           </div>
         ))
@@ -49,6 +49,7 @@ const Cart = ({cart,setCart,handleChange}) => {
         <span>So'm-{price}</span>
       </div>
     </article>
+    </>
   )
 }
 
